@@ -36,7 +36,7 @@ pipeline {
                     zip -r jacoco-report.zip target/site/jacoco
                     zip -r surefire-reports.zip target/surefire-reports
                 '''
-                withCredentials([usernamePassword(credentialsId: 'nexus-creds', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'nexus-cred', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
                     sh '''
                         curl -u $NEXUS_USER:$NEXUS_PASS --upload-file jacoco-report.zip \
                           http://localhost:8081/repository/reports/country-service/$BUILD_NUMBER/jacoco-report.zip
